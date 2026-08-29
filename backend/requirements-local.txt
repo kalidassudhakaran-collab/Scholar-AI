@@ -1,0 +1,20 @@
+# Minimal backend — no Docker, no PostgreSQL, no Redis
+Django>=5.0,<6
+djangorestframework>=3.15
+djangorestframework-simplejwt>=5.3
+django-cors-headers>=4.3
+celery>=5.3
+channels>=4.0
+daphne>=4.1
+Pillow>=10.0
+django-filter>=24.0
+deep-translator>=1.11
+pdfplumber>=0.11
+pytesseract>=0.3
+imageio-ffmpeg>=0.5
+openai-whisper>=20231117
+yt-dlp>=2024.1
+youtube-transcript-api>=0.6
+
+# Optional: full AI + media (large download). Install after local setup:
+#   pip install -r requirements-ai.txt

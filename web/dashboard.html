@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tools — Scholar AI</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/motion.css" />
+</head>
+<body class="app-body">
+  <div class="bg-motion" aria-hidden="true">
+    <div class="grid-glow"></div>
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+  </div>
+  <div class="motion-orbs" aria-hidden="true">
+    <span class="motion-orb motion-orb--sm motion-orb--1"></span>
+    <span class="motion-orb motion-orb--md motion-orb--2"></span>
+    <span class="motion-orb motion-orb--accent motion-orb--3"></span>
+  </div>
+  <div class="dashboard-page">
+    <header class="dashboard-header">
+      <a href="/dashboard.html" class="logo">Scholar AI</a>
+      <nav class="dashboard-nav" aria-label="Quick links">
+        <a href="/app.html?panel=history" class="dashboard-nav-link">History</a>
+        <button type="button" class="dashboard-nav-link" data-feedback-open>Feedback</button>
+      </nav>
+      <div class="dashboard-header-actions">
+        <span id="user-email">...</span>
+        <button type="button" class="btn btn-ghost" id="logout">Log out</button>
+      </div>
+    </header>
+    <main class="dashboard-main">
+      <div class="motion-drift-tags" aria-hidden="true">
+        <span class="motion-drift-tag motion-drift-tag--1">Summarize</span>
+        <span class="motion-drift-tag motion-drift-tag--2">Translate</span>
+        <span class="motion-drift-tag motion-drift-tag--3">AI scan</span>
+      </div>
+      <div class="dashboard-intro">
+        <h1>Choose a tool</h1>
+        <p>Pick what you want to work on. Your results are saved automatically in History.</p>
+      </div>
+      <div class="feature-grid" id="feature-grid">
+        <a href="/app.html?panel=summarizer" class="feature-card" data-feature="summarizer">
+          <span class="feature-card-icon" aria-hidden="true">S</span>
+          <h2>Summarizer</h2>
+          <p>Short, detailed, or bullet summaries from any text.</p>
+        </a>
+        <a href="/app.html?panel=translator" class="feature-card" data-feature="translator">
+          <span class="feature-card-icon" aria-hidden="true">T</span>
+          <h2>Translator</h2>
+          <p>English, Hindi, Malayalam, Tamil, and Telugu.</p>
+        </a>
+        <a href="/app.html?panel=paraphraser" class="feature-card" data-feature="paraphraser">
+          <span class="feature-card-icon" aria-hidden="true">P</span>
+          <h2>Paraphraser</h2>
+          <p>Fluent, formal, or creative rewrites.</p>
+        </a>
+        <a href="/app.html?panel=humanizer" class="feature-card" data-feature="humanizer">
+          <span class="feature-card-icon" aria-hidden="true">H</span>
+          <h2>Humanizer</h2>
+          <p>Make AI text sound natural and human.</p>
+        </a>
+        <a href="/app.html?panel=ai_detection" class="feature-card" data-feature="ai_detection">
+          <span class="feature-card-icon" aria-hidden="true">AI</span>
+          <h2>AI Detection</h2>
+          <p>Check if text was likely written by AI.</p>
+        </a>
+        <a href="/app.html?panel=plagiarism" class="feature-card" data-feature="plagiarism">
+          <span class="feature-card-icon" aria-hidden="true">%</span>
+          <h2>Plagiarism</h2>
+          <p>Compare two documents sentence by sentence.</p>
+        </a>
+        <a href="/app.html?panel=ocr" class="feature-card" data-feature="ocr">
+          <span class="feature-card-icon" aria-hidden="true">O</span>
+          <h2>OCR</h2>
+          <p>Extract text from PDFs and images.</p>
+        </a>
+        <a href="/app.html?panel=voice" class="feature-card" data-feature="voice">
+          <span class="feature-card-icon" aria-hidden="true">V</span>
+          <h2>Voice</h2>
+          <p>Transcribe audio with Whisper.</p>
+        </a>
+        <a href="/app.html?panel=youtube" class="feature-card" data-feature="youtube">
+          <span class="feature-card-icon" aria-hidden="true">Y</span>
+          <h2>YouTube</h2>
+          <p>Summarize lectures from a video URL.</p>
+        </a>
+      </div>
+    </main>
+  </div>
+  <dialog id="feedback-dialog" class="app-dialog feedback-dialog" aria-labelledby="feedback-dialog-title">
+    <form id="feedback-form" class="app-dialog-body">
+      <h3 id="feedback-dialog-title">Send feedback</h3>
+      <p class="feedback-dialog-desc">Tell us what works, what doesn’t, and what we should improve.</p>
+      <label class="feedback-label" for="feedback-feature">Feature</label>
+      <select id="feedback-feature" class="feedback-select" name="feature">
+        <option value="general">General / whole app</option>
+        <option value="summarizer">Summarizer</option>
+        <option value="translator">Translator</option>
+        <option value="paraphraser">Paraphraser</option>
+        <option value="humanizer">Humanizer</option>
+        <option value="ai_detection">AI Detection</option>
+        <option value="plagiarism">Plagiarism</option>
+        <option value="ocr">OCR</option>
+        <option value="voice">Voice</option>
+        <option value="youtube">YouTube</option>
+      </select>
+      <label class="feedback-label" for="feedback-likes">What’s working well</label>
+      <textarea id="feedback-likes" class="feedback-textarea" name="likes" rows="2" placeholder="Features you like, helpful results…"></textarea>
+      <label class="feedback-label" for="feedback-drawbacks">Drawbacks &amp; issues</label>
+      <textarea id="feedback-drawbacks" class="feedback-textarea" name="drawbacks" rows="3" placeholder="Bugs, slow runs, confusing UI, missing options…"></textarea>
+      <label class="feedback-label" for="feedback-improvements">Improvements needed</label>
+      <textarea id="feedback-improvements" class="feedback-textarea" name="improvements" rows="3" placeholder="Ideas, features you wish existed…"></textarea>
+      <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+      <div class="app-dialog-actions">
+        <button type="button" class="btn btn-ghost" id="feedback-dialog-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="feedback-submit">Send feedback</button>
+      </div>
+    </form>
+  </dialog>
+  <script src="/js/api.js"></script>
+  <script src="/js/feedback.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

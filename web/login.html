@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign in — Scholar AI</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/motion.css" />
+</head>
+<body>
+  <div class="bg-motion" aria-hidden="true">
+    <div class="grid-glow"></div>
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+  </div>
+  <div class="auth-page">
+    <div class="card">
+      <h1>Welcome back</h1>
+      <p class="desc" style="margin-bottom: 1.25rem">Sign in to your Scholar AI workspace</p>
+      <p id="error" class="error" hidden></p>
+      <form id="form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%">Sign in</button>
+      </form>
+      <p class="auth-sub">
+        No account? <a href="/register.html">Register</a>
+      </p>
+    </div>
+  </div>
+  <script src="/js/api.js"></script>
+  <script>
+    if (isLoggedIn()) location.href = "/dashboard.html";
+    document.getElementById("form").onsubmit = async (e) => {
+      e.preventDefault();
+      const err = document.getElementById("error");
+      err.hidden = true;
+      try {
+        const res = await fetch("/api/auth/login/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+          }),
+        });
+        if (!res.ok) throw new Error("Invalid email or password");
+        const data = await res.json();
+        setTokens(data.access, data.refresh);
+        location.href = "/dashboard.html";
+      } catch (ex) {
+        err.textContent = ex.message;
+        err.hidden = false;
+      }
+    };
+  </script>
+</body>
+</html>

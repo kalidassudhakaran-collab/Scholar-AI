@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dashboard — Scholar AI</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/motion.css" />
+</head>
+<body class="app-body">
+  <div class="bg-motion" aria-hidden="true">
+    <div class="grid-glow"></div>
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="blob blob-3"></span>
+    <span class="blob blob-4"></span>
+  </div>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a href="/dashboard.html" class="logo">Scholar AI</a>
+      <nav id="nav">
+        <a href="#" data-panel="summarizer" class="active">Summarizer</a>
+        <a href="#" data-panel="translator">Translator</a>
+        <a href="#" data-panel="paraphraser">Paraphraser</a>
+        <a href="#" data-panel="humanizer">Humanizer</a>
+        <a href="#" data-panel="plagiarism">Plagiarism</a>
+        <a href="#" data-panel="ai_detection">AI Detection</a>
+        <a href="#" data-panel="ocr">OCR</a>
+        <a href="#" data-panel="voice">Voice</a>
+        <a href="#" data-panel="youtube">YouTube</a>
+      </nav>
+    </aside>
+    <div class="main">
+      <header class="header">
+        <div class="header-start">
+          <a href="/dashboard.html" class="btn btn-ghost header-back">← All tools</a>
+          <a href="/app.html?panel=history" class="btn btn-ghost header-history" id="nav-history">History</a>
+          <button type="button" class="btn btn-ghost header-feedback" data-feedback-open>Feedback</button>
+        </div>
+        <span id="user-email">...</span>
+        <button type="button" class="btn btn-ghost" id="logout">Log out</button>
+      </header>
+      <div class="content">
+        <section id="panel-summarizer" class="panel active">
+          <h2>Summarizer</h2>
+          <p class="desc">Short, detailed, or bullet-point summaries.</p>
+          <div class="panel-card">
+            <div class="options" data-option="summary_type">
+              <button type="button" class="chip active" data-value="detailed">Detailed</button>
+              <button type="button" class="chip" data-value="short">Short</button>
+              <button type="button" class="chip" data-value="bullets">Bullets</button>
+            </div>
+            <textarea id="text-summarizer" placeholder="Paste text here..."></textarea>
+            <div class="file-zone file-zone--inline" id="summarizer-zone">Or upload PDF/DOCX</div>
+            <input type="file" id="summarizer-file" accept=".pdf,.docx,.txt,.md" hidden />
+            <button type="button" class="btn btn-primary tool-run" data-endpoint="/summarizer/run/" data-text="text-summarizer" data-file="summarizer-file" data-options="summary_type">Run</button>
+          </div>
+        </section>
+
+        <section id="panel-translator" class="panel">
+          <h2>Translator</h2>
+          <p class="desc">English, Hindi, Malayalam, Tamil, and Telugu. Other pairs go through English automatically.</p>
+          <div class="panel-card">
+            <div class="lang-row">
+              <div class="form-group">
+                <label for="lang-src">From</label>
+                <select id="lang-src">
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="ml">Malayalam</option>
+                  <option value="ta">Tamil</option>
+                  <option value="te">Telugu</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="lang-tgt">To</label>
+                <select id="lang-tgt">
+                  <option value="ml">Malayalam</option>
+                  <option value="en">English</option>
+                  <option value="hi">Hindi</option>
+                  <option value="ta">Tamil</option>
+                  <option value="te">Telugu</option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-ghost" id="lang-swap" title="Swap languages">⇄</button>
+            </div>
+            <textarea id="text-translator" placeholder="Paste text here..."></textarea>
+            <button type="button" class="btn btn-primary tool-run" data-endpoint="/translator/run/" data-text="text-translator" data-lang="1">Translate</button>
+          </div>
+        </section>
+
+        <section id="panel-humanizer" class="panel">
+          <h2>Humanizer</h2>
+          <p class="desc">Make AI-sounding text read more naturally.</p>
+          <div class="panel-card">
+            <div class="options" data-option="humanize_style">
+              <button type="button" class="chip active" data-value="natural">Natural</button>
+              <button type="button" class="chip" data-value="academic">Academic</button>
+              <button type="button" class="chip" data-value="casual">Casual</button>
+            </div>
+            <textarea id="text-humanizer" placeholder="Paste AI-generated or formal text..."></textarea>
+            <button type="button" class="btn btn-primary tool-run" data-endpoint="/humanizer/run/" data-text="text-humanizer" data-options="humanize_style">Humanize</button>
+          </div>
+        </section>
+
+        <section id="panel-plagiarism" class="panel">
+          <h2>Plagiarism Checker</h2>
+          <p class="desc">Compare two documents sentence by sentence.</p>
+          <div class="panel-card">
+            <label class="field-label" for="text-plagiarism-a">Document A (your text)</label>
+            <textarea id="text-plagiarism-a" class="textarea-sm" placeholder="Paste document A..."></textarea>
+            <div class="file-zone file-zone--inline" id="plagiarism-a-zone">Or upload PDF/DOCX for Document A</div>
+            <input type="file" id="plagiarism-a-file" accept=".pdf,.docx,.txt,.md" hidden />
+            <label class="field-label field-label-spaced" for="text-plagiarism-b">Document B (source to compare)</label>
+            <textarea id="text-plagiarism-b" class="textarea-sm" placeholder="Paste document B..."></textarea>
+            <div class="file-zone file-zone--inline" id="plagiarism-b-zone">Or upload PDF/DOCX for Document B</div>
+            <input type="file" id="plagiarism-b-file" accept=".pdf,.docx,.txt,.md" hidden />
+            <button type="button" class="btn btn-primary" id="plagiarism-run">Check plagiarism</button>
+          </div>
+        </section>
+
+        <section id="panel-ai_detection" class="panel">
+          <h2>AI Text Detection</h2>
+          <p class="desc">Estimate whether text was likely written by AI. Works offline after models are installed.</p>
+          <div class="panel-card">
+            <div class="options" data-option="sensitivity">
+              <button type="button" class="chip active" data-value="balanced">Balanced</button>
+              <button type="button" class="chip" data-value="strict">Strict</button>
+              <button type="button" class="chip" data-value="lenient">Lenient</button>
+            </div>
+            <textarea id="text-ai-detection" placeholder="Paste essay, assignment, or article to analyze..."></textarea>
+            <button type="button" class="btn btn-primary tool-run" data-endpoint="/ai-detection/run/" data-text="text-ai-detection" data-options="sensitivity">Detect AI text</button>
+          </div>
+        </section>
+
+        <section id="panel-paraphraser" class="panel">
+          <h2>Paraphraser</h2>
+          <p class="desc">Fluent, formal, or creative styles.</p>
+          <div class="panel-card">
+            <div class="options" data-option="style">
+              <button type="button" class="chip active" data-value="fluent">Fluent</button>
+              <button type="button" class="chip" data-value="formal">Formal</button>
+              <button type="button" class="chip" data-value="creative">Creative</button>
+            </div>
+            <textarea id="text-paraphraser" placeholder="Paste text here..."></textarea>
+            <div class="file-zone file-zone--inline" id="paraphraser-zone">Or upload PDF/DOCX</div>
+            <input type="file" id="paraphraser-file" accept=".pdf,.docx,.txt,.md" hidden />
+            <button type="button" class="btn btn-primary tool-run" data-endpoint="/paraphraser/run/" data-text="text-paraphraser" data-file="paraphraser-file" data-options="style">Paraphrase</button>
+          </div>
+        </section>
+
+        <section id="panel-ocr" class="panel">
+          <h2>OCR</h2>
+          <p class="desc">Upload PDF or image to extract text.</p>
+          <div class="panel-card">
+            <div class="file-zone" id="ocr-zone">Click to upload PDF, PNG, JPG</div>
+            <input type="file" id="ocr-file" accept=".pdf,.png,.jpg,.jpeg,.webp" hidden />
+          </div>
+        </section>
+
+        <section id="panel-voice" class="panel">
+          <h2>Voice to Text</h2>
+          <p class="desc">Upload MP3, WAV, M4A, or WebM to transcribe with Whisper.</p>
+          <div class="panel-card">
+            <div class="file-zone" id="voice-zone">Click to upload audio</div>
+            <input type="file" id="voice-file" accept="audio/*,.mp3,.wav,.m4a,.webm,.ogg" hidden />
+          </div>
+        </section>
+
+        <section id="panel-youtube" class="panel">
+          <h2>YouTube Summarizer</h2>
+          <p class="desc">Paste a YouTube lecture URL. Output includes summary, key points, and the full caption transcript.</p>
+          <div class="panel-card">
+            <input type="url" id="youtube-url" placeholder="https://www.youtube.com/watch?v=..." />
+            <button type="button" class="btn btn-primary" id="youtube-run">Summarize video</button>
+          </div>
+        </section>
+
+        <section id="panel-history" class="panel">
+          <h2>History</h2>
+          <p class="desc">Search, filter, or re-run your past work.</p>
+          <div class="history-toolbar">
+            <input type="search" id="history-search" placeholder="Search input or output..." />
+            <select id="history-feature" title="Feature">
+              <option value="">All features</option>
+              <option value="summarizer">Summarizer</option>
+              <option value="translator">Translator</option>
+              <option value="paraphraser">Paraphraser</option>
+              <option value="humanizer">Humanizer</option>
+              <option value="plagiarism">Plagiarism</option>
+              <option value="ai_detection">AI Detection</option>
+              <option value="ocr">OCR</option>
+              <option value="voice">Voice</option>
+              <option value="youtube">YouTube</option>
+            </select>
+            <select id="history-status" title="Status">
+              <option value="">Any status</option>
+              <option value="completed">Completed</option>
+              <option value="failed">Failed</option>
+              <option value="processing">Processing</option>
+              <option value="pending">Pending</option>
+            </select>
+            <select id="history-date-preset" title="Date range">
+              <option value="">Any time</option>
+              <option value="today">Today</option>
+              <option value="week">This week</option>
+              <option value="month">This month</option>
+              <option value="custom">Custom range</option>
+            </select>
+            <input type="date" id="history-date-from" class="history-date-hidden" title="From date" aria-label="From date" />
+            <input type="date" id="history-date-to" class="history-date-hidden" title="To date" aria-label="To date" />
+            <label class="history-starred"><input type="checkbox" id="history-starred-only" /> Starred</label>
+          </div>
+          <div class="history-bulk-bar" id="history-bulk-bar">
+            <label class="history-select-all-label"
+              ><input type="checkbox" id="history-select-all" /> Select page</label
+            >
+            <button type="button" class="btn btn-ghost" id="history-bulk-delete" disabled>Delete selected</button>
+            <span class="history-selected-count" id="history-selected-count"></span>
+          </div>
+          <ul class="history-list" id="history-list"></ul>
+          <div class="history-pagination" id="history-pagination" hidden>
+            <button type="button" class="btn btn-ghost" id="history-prev">Previous</button>
+            <span id="history-page-info">Page 1</span>
+            <button type="button" class="btn btn-ghost" id="history-next">Next</button>
+          </div>
+        </section>
+
+        <div class="progress" id="progress-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+        <p class="status" id="status"></p>
+        <div class="output" id="output"></div>
+      </div>
+    </div>
+  </div>
+  <dialog id="feedback-dialog" class="app-dialog feedback-dialog" aria-labelledby="feedback-dialog-title">
+    <form id="feedback-form" class="app-dialog-body">
+      <h3 id="feedback-dialog-title">Send feedback</h3>
+      <p class="feedback-dialog-desc">Tell us what works, what doesn’t, and what we should improve.</p>
+      <label class="feedback-label" for="feedback-feature">Feature</label>
+      <select id="feedback-feature" class="feedback-select" name="feature">
+        <option value="general">General / whole app</option>
+        <option value="summarizer">Summarizer</option>
+        <option value="translator">Translator</option>
+        <option value="paraphraser">Paraphraser</option>
+        <option value="humanizer">Humanizer</option>
+        <option value="ai_detection">AI Detection</option>
+        <option value="plagiarism">Plagiarism</option>
+        <option value="ocr">OCR</option>
+        <option value="voice">Voice</option>
+        <option value="youtube">YouTube</option>
+      </select>
+      <label class="feedback-label" for="feedback-likes">What’s working well</label>
+      <textarea id="feedback-likes" class="feedback-textarea" name="likes" rows="2" placeholder="Features you like, helpful results…"></textarea>
+      <label class="feedback-label" for="feedback-drawbacks">Drawbacks &amp; issues</label>
+      <textarea id="feedback-drawbacks" class="feedback-textarea" name="drawbacks" rows="3" placeholder="Bugs, slow runs, confusing UI, missing options…"></textarea>
+      <label class="feedback-label" for="feedback-improvements">Improvements needed</label>
+      <textarea id="feedback-improvements" class="feedback-textarea" name="improvements" rows="3" placeholder="Ideas, features you wish existed…"></textarea>
+      <p id="feedback-status" class="feedback-status" role="status" aria-live="polite"></p>
+      <div class="app-dialog-actions">
+        <button type="button" class="btn btn-ghost" id="feedback-dialog-cancel">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="feedback-submit">Send feedback</button>
+      </div>
+    </form>
+  </dialog>
+  <dialog id="confirm-dialog" class="app-dialog confirm-dialog" aria-labelledby="confirm-dialog-title">
+    <div class="app-dialog-body">
+      <h3 id="confirm-dialog-title">Confirm</h3>
+      <p id="confirm-dialog-message"></p>
+      <div class="app-dialog-actions">
+        <button type="button" class="btn btn-ghost" id="confirm-dialog-cancel">Cancel</button>
+        <button type="button" class="btn btn-danger" id="confirm-dialog-ok">Delete</button>
+      </div>
+    </div>
+  </dialog>
+  <script src="/js/api.js"></script>
+  <script src="/js/feedback.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,421 @@
+/* Scholar AI — eye-catching motion (respects prefers-reduced-motion) */
+
+@keyframes motion-float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes motion-float-tilt {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(-2deg);
+  }
+  50% {
+    transform: translate(10px, -16px) rotate(3deg);
+  }
+}
+
+@keyframes motion-float-tilt-alt {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(2deg);
+  }
+  50% {
+    transform: translate(-12px, 10px) rotate(-3deg);
+  }
+}
+
+@keyframes motion-mockup-lift {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-8px) scale(1.01);
+  }
+}
+
+@keyframes motion-orb-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.5;
+  }
+  33% {
+    transform: translate(24px, -18px) scale(1.08);
+    opacity: 0.75;
+  }
+  66% {
+    transform: translate(-16px, 12px) scale(0.95);
+    opacity: 0.55;
+  }
+}
+
+@keyframes motion-pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 8px 32px rgba(139, 92, 246, 0.15);
+  }
+  50% {
+    box-shadow: 0 12px 40px rgba(139, 92, 246, 0.28);
+  }
+}
+
+@keyframes motion-line-shimmer {
+  0% {
+    opacity: 0.5;
+    width: 70%;
+  }
+  50% {
+    opacity: 1;
+    width: 90%;
+  }
+  100% {
+    opacity: 0.5;
+    width: 70%;
+  }
+}
+
+@keyframes motion-chip-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes motion-result-glow {
+  0%,
+  100% {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.12), rgba(125, 211, 252, 0.1));
+  }
+  50% {
+    background: linear-gradient(135deg, rgba(167, 139, 250, 0.28), rgba(125, 211, 252, 0.22));
+  }
+}
+
+@keyframes motion-badge-pop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes motion-spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes motion-particle-rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.7;
+  }
+  85% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-120px) scale(0.6);
+    opacity: 0;
+  }
+}
+
+/* —— Landing hero mockup —— */
+.landing-mockup {
+  animation: motion-mockup-lift 6s ease-in-out infinite, motion-pulse-glow 5s ease-in-out infinite;
+}
+
+.landing-float-card--1 {
+  animation: motion-float-tilt 7s ease-in-out infinite;
+}
+
+.landing-float-card--2 {
+  animation: motion-float-tilt-alt 8s ease-in-out infinite;
+}
+
+.landing-float-card--3 {
+  animation: motion-float-y 6.5s ease-in-out infinite;
+}
+
+.mock-line--active {
+  animation: motion-line-shimmer 3s ease-in-out infinite;
+}
+
+.mock-chip--on {
+  animation: motion-chip-pulse 2.5s ease-in-out infinite;
+}
+
+.mock-chip:nth-child(2) {
+  animation: motion-chip-pulse 2.5s ease-in-out infinite 0.8s;
+}
+
+.mock-chip:nth-child(3) {
+  animation: motion-chip-pulse 2.5s ease-in-out infinite 1.6s;
+}
+
+.mock-block--result {
+  animation: motion-result-glow 4s ease-in-out infinite;
+}
+
+.hero-badge {
+  animation: fade-up 0.6s var(--ease) both, motion-badge-pop 4s ease-in-out infinite 0.6s;
+}
+
+/* Floating particles */
+.motion-particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.motion-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(167, 139, 250, 0.8), rgba(56, 189, 248, 0.6));
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.4);
+  animation: motion-particle-rise 8s ease-in-out infinite;
+}
+
+.motion-particle:nth-child(1) {
+  left: 10%;
+  bottom: 20%;
+  animation-delay: 0s;
+  animation-duration: 7s;
+}
+.motion-particle:nth-child(2) {
+  left: 25%;
+  bottom: 5%;
+  animation-delay: 1.2s;
+  width: 6px;
+  height: 6px;
+}
+.motion-particle:nth-child(3) {
+  left: 55%;
+  bottom: 15%;
+  animation-delay: 2.4s;
+}
+.motion-particle:nth-child(4) {
+  left: 75%;
+  bottom: 8%;
+  animation-delay: 0.8s;
+  animation-duration: 9s;
+}
+.motion-particle:nth-child(5) {
+  left: 88%;
+  bottom: 25%;
+  animation-delay: 3s;
+  width: 5px;
+  height: 5px;
+}
+
+/* Decorative orbs (dashboard / auth) */
+.motion-orbs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.motion-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: motion-orb-drift 18s ease-in-out infinite;
+}
+
+.motion-orb--sm {
+  width: 100px;
+  height: 100px;
+  background: rgba(167, 139, 250, 0.35);
+}
+
+.motion-orb--md {
+  width: 140px;
+  height: 140px;
+  background: rgba(125, 211, 252, 0.3);
+  animation-duration: 22s;
+  animation-delay: -4s;
+}
+
+.motion-orb--accent {
+  width: 80px;
+  height: 80px;
+  background: rgba(251, 113, 133, 0.25);
+  animation-duration: 15s;
+  animation-delay: -8s;
+}
+
+.motion-orb--1 {
+  top: 12%;
+  right: 8%;
+}
+.motion-orb--2 {
+  bottom: 18%;
+  left: 6%;
+}
+.motion-orb--3 {
+  top: 55%;
+  right: 22%;
+}
+
+/* Drifting labels (dashboard) */
+.motion-drift-tags {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.motion-drift-tag {
+  position: absolute;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--accent-hover);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  white-space: nowrap;
+}
+
+.motion-drift-tag--1 {
+  top: 8%;
+  right: 12%;
+  animation: motion-float-tilt 9s ease-in-out infinite;
+}
+
+.motion-drift-tag--2 {
+  bottom: 12%;
+  left: 8%;
+  animation: motion-float-tilt-alt 10s ease-in-out infinite;
+}
+
+.motion-drift-tag--3 {
+  top: 42%;
+  right: 5%;
+  animation: motion-float-y 7s ease-in-out infinite 1s;
+  font-size: 0.65rem;
+}
+
+/* Feature cards — hover icon pulse (landing + dashboard) */
+.landing-feature-card:hover .landing-feature-icon,
+.feature-card:hover .feature-card-icon {
+  animation: motion-badge-pop 1.4s ease-in-out infinite;
+}
+
+/* Auth card gentle float */
+.auth-page .card {
+  animation: fade-up 0.55s var(--ease) both, motion-float-y 7s ease-in-out infinite 0.5s;
+}
+
+/* CTA band shimmer border */
+.landing-cta-inner {
+  position: relative;
+  overflow: hidden;
+}
+
+.landing-cta-inner::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(167, 139, 250, 0.4),
+    rgba(56, 189, 248, 0.4),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  z-index: -1;
+  opacity: 0.6;
+}
+
+.landing-cta-inner::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(var(--radius-lg) - 1px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 246, 255, 0.98));
+  z-index: -1;
+}
+
+/* App tool panels — soft entrance */
+.panel.active {
+  animation: fade-up 0.45s var(--ease) both;
+}
+
+.panel-card {
+  transition:
+    transform 0.25s var(--ease),
+    box-shadow 0.25s var(--ease);
+}
+
+.panel-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Ring accent behind mockup */
+.landing-hero-visual::before {
+  content: "";
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  left: -10%;
+  top: -10%;
+  border-radius: 50%;
+  border: 1px dashed rgba(139, 92, 246, 0.15);
+  animation: motion-spin-slow 40s linear infinite;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-mockup,
+  .landing-float-card,
+  .landing-float-card--1,
+  .landing-float-card--2,
+  .landing-float-card--3,
+  .mock-line--active,
+  .mock-chip--on,
+  .mock-chip,
+  .mock-block--result,
+  .hero-badge,
+  .motion-particle,
+  .motion-orb,
+  .motion-drift-tag,
+  .landing-feature-card,
+  .auth-page .card,
+  .landing-hero-visual::before {
+    animation: none !important;
+  }
+
+  .landing-cta-inner::before {
+    animation: none !important;
+  }
+}
