@@ -8,7 +8,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-scholar_ai}
       POSTGRES_USER: ${POSTGRES_USER:-scholar}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-scholar_dev_password}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}  # Add API key here in .env
     ports:
       - "5432:5432"
     healthcheck:
@@ -37,8 +37,8 @@ services:
     volumes:
       - minio_data:/data
     environment:
-      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
-      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin123}
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY}  # Add API key here in .env
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY}  # Add API key here in .env
 
   backend:
     build: ./backend

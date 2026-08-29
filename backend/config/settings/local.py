@@ -5,9 +5,15 @@ Uses SQLite, in-memory cache/channels, and synchronous Celery (no worker process
 Set: DJANGO_SETTINGS_MODULE=config.settings.local
 """
 
+import os
+
 from .base import *  # noqa: F403
 
 DEBUG = True
+
+# Add API key here in .env as DJANGO_SECRET_KEY when deploying.
+# This placeholder is only for local SQLite runs.
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY") or "add-api-key-here"
 
 # Local dev: no API rate limits (avoids "throttled" after testing features)
 REST_FRAMEWORK = {

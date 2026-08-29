@@ -4,10 +4,8 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-SECRET_KEY = os.environ.get(
-    "DJANGO_SECRET_KEY",
-    "django-insecure-dev-only-change-in-production",
-)
+# Add API key here — set DJANGO_SECRET_KEY in your local .env (never commit it)
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "")
 
 DEBUG = os.environ.get("DJANGO_DEBUG", "True").lower() in ("true", "1", "yes")
 
@@ -82,7 +80,7 @@ DATABASES = {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": os.environ.get("POSTGRES_DB", "scholar_ai"),
         "USER": os.environ.get("POSTGRES_USER", "scholar"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "scholar_dev_password"),
+        "PASSWORD": os.environ.get("DB_PASSWORD", ""),  # Add API key here
         "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
         "PORT": os.environ.get("POSTGRES_PORT", "5432"),
     }
@@ -189,8 +187,8 @@ USE_S3 = os.environ.get("USE_S3", "false").lower() in ("true", "1", "yes")
 
 if USE_S3:
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-    AWS_ACCESS_KEY_ID = os.environ.get("MINIO_ACCESS_KEY", "minioadmin")
-    AWS_SECRET_ACCESS_KEY = os.environ.get("MINIO_SECRET_KEY", "minioadmin123")
+    AWS_ACCESS_KEY_ID = os.environ.get("MINIO_ACCESS_KEY", "")  # Add API key here
+    AWS_SECRET_ACCESS_KEY = os.environ.get("MINIO_SECRET_KEY", "")  # Add API key here
     AWS_STORAGE_BUCKET_NAME = os.environ.get("MINIO_BUCKET", "scholar-ai-files")
     AWS_S3_ENDPOINT_URL = f"http://{os.environ.get('MINIO_ENDPOINT', 'localhost:9000')}"
     AWS_S3_USE_SSL = os.environ.get("MINIO_USE_SSL", "false").lower() in ("true", "1")
